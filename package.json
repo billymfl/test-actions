@@ -1,15 +1,15 @@
 {
-  "name": "simple-microservices-template",
+  "name": "test-actions",
   "version": "1.0.0",
   "description": "App description",
   "main": "index.js",
   "scripts": {
-    "test": "./mocha-test.sh",
+    "test": "NODE_ENV=test HOST=0.0.0.0 PORT=88 nyc mocha --exit",
     "start": "node server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/billymfl/simple-microservices-template.git"
+    "url": "git+https://github.com/billymfl/test-actions.git"
   },
   "keywords": [
     "microservice"
@@ -17,9 +17,9 @@
   "author": "Billy Marin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/billymfl/simple-microservices-template/issues"
+    "url": "https://github.com/billymfl/test-actions/issues"
   },
-  "homepage": "https://github.com/billymfl/simple-microservices-template#readme",
+  "homepage": "https://github.com/billymfl/test-actions#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.3.0",
