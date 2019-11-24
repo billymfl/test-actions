@@ -1,12 +1,12 @@
 const chai = require('chai');
 const assert = chai.assert;
 const CircuitBreaker = require('../modules/CircuitBreaker');
-const server = require('../server/index');
-const {APPNAME} = require('../config');
+// const server = require('../server/index');
+// const {APPNAME} = require('../config');
 
-const sleep = (ms) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
+// const sleep = (ms) => {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// };
 
 describe('CircuitBreaker', function() {
   let circuitBreaker;
@@ -41,46 +41,46 @@ describe('CircuitBreaker', function() {
   });
 
   // Note: make calls to ourself instead of hassle of mocking axios
-  describe('callService', function() {
-    before(async function() {
-      await server.start();
-    });
+  //   describe('callService', function() {
+  //     before(async function() {
+  //       await server.start();
+  //     });
 
-    after(async function() {
-      await server.stop();
-    });
+  //     after(async function() {
+  //       await server.stop();
+  //     });
 
-    it('should call a service and return success data', async function() {
-      const request = {
-        method: 'GET',
-        url: 'http://0.0.0.0:88/',
-      };
-      const res = await circuitBreaker.callService(request);
-      assert.equal(res.statusCode, 200, 'statusCode');
-      assert.equal(res.data.APPNAME, APPNAME, 'response data');
-    });
+  //     it('should call a service and return success data', async function() {
+  //       const request = {
+  //         method: 'GET',
+  //         url: 'http://0.0.0.0:88/',
+  //       };
+  //       const res = await circuitBreaker.callService(request);
+  //       assert.equal(res.statusCode, 200, 'statusCode');
+  //       assert.equal(res.data.APPNAME, APPNAME, 'response data');
+  //     });
 
-    it('should trip the circuit to OPEN, fail on 2nd request, and clear on 3rd request', async function() {
-      circuitBreaker.setFailureThreshold(1);
-      circuitBreaker.setRequestTimeout(1);
-      circuitBreaker.setCooldownPeriod(3);
-      this.timeout(9000);
+  //     it('should trip the circuit to OPEN, fail on 2nd request, and clear on 3rd request', async function() {
+  //       circuitBreaker.setFailureThreshold(1);
+  //       circuitBreaker.setRequestTimeout(1);
+  //       circuitBreaker.setCooldownPeriod(3);
+  //       this.timeout(9000);
 
-      const request = {
-        method: 'POST',
-        url: 'http://0.0.0.0:88/mock-test-circuitbreaker-failover',
-      };
-      const res = await circuitBreaker.callService(request);
-      assert.equal(res, false, 'circuit breaker should return false');
+  //       const request = {
+  //         method: 'POST',
+  //         url: 'http://0.0.0.0:88/mock-test-circuitbreaker-failover',
+  //       };
+  //       const res = await circuitBreaker.callService(request);
+  //       assert.equal(res, false, 'circuit breaker should return false');
 
-      const res2 = await circuitBreaker.callService(request);
-      assert.equal(res2, false, 'circuit breaker should return false again');
+  //       const res2 = await circuitBreaker.callService(request);
+  //       assert.equal(res2, false, 'circuit breaker should return false again');
 
-      await sleep(3000);
+  //       await sleep(3000);
 
-      circuitBreaker.setRequestTimeout(5);
-      const res3 = await circuitBreaker.callService(request);
-      assert.equal(res3.statusCode, 200, 'circuit breaker should return success');
-    });
-  });
+//       circuitBreaker.setRequestTimeout(5);
+//       const res3 = await circuitBreaker.callService(request);
+//       assert.equal(res3.statusCode, 200, 'circuit breaker should return success');
+//     });
+//   });
 });
