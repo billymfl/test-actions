@@ -1,0 +1,13 @@
+node_modules
+logs
+npm-debug.log
+env.example
+test
+.eslintrc.js
+.gitignore
+README.md
+Dockerfile
+.git
+docs
+.DS_Store
+.nyc_output
