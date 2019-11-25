@@ -1,6 +1,5 @@
 
 # Name of the project
-> Additional information or tagline
 
 Microservices template for quick prototyping and rapid application development.
 
