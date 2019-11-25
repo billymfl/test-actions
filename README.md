@@ -1,4 +1,3 @@
-![Logo of the project](https://localhost/sample-logo.png)
 
 # Name of the project
 > Additional information or tagline
