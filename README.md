@@ -1,7 +1,5 @@
-![Logo of the project](https://localhost/sample-logo.png)
 
 # Name of the project
-> Additional information or tagline
 
 Microservices template for quick prototyping and rapid application development.
 
