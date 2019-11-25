@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag mydocker:v1
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: billymfl/test-actions/mydocker:v1
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
